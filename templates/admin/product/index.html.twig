@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+  <div class="container py-5">
+
+    <div class="row">
+
+        {% include "_messages_flash.html.twig" %}
+    
+        <div class="col-12 d-flex align-items-center justify-content-between">
+            <h3>Liste des produits</h3>
+            <a class="btn btn-primary" href="{{ path('admin_product_new') }}">Ajouter</a>
+        </div>
+
+        <div class="navigation">
+            {{ knp_pagination_render(products) }}
+        </div>
+        {% for product in products %}
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+
+                <div class="card">
+                    <img src="{{ product.imagePath }}" class="card-img-top imageCard" alt="image_category">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name | upper }}</h5>
+                        <p class="mb-1">{{ product.category.name }}</p>
+                        <p>{{ product.price | priceEuro }}</p>
+                        <a href="{{ path('admin_product_edit',{ 'id' : product.id } ) }}" class="btn btn-primary w-100">Gérer</a>
+                    </div>
+                </div>
+        
+            </div>
+            
+        {% endfor %}
+         <div class="navigation mt-3">
+            {{ knp_pagination_render(products) }}
+        </div>
+
+    </div>
+
+  </div>
+{% endblock %}

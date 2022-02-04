@@ -1,0 +1,58 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+  <div class="container py-5">
+
+    <div class="row">
+
+        {% include "_messages_flash.html.twig" %}
+    
+        <div class="col-12">
+            <a class="btn btn-secondary" href="{{ path('admin_post_list') }}">Retour à la liste </a>
+        </div>
+
+        
+
+            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                <div class="card">
+                    <img src="{{ post.imagePath }}" class="card-img-top imageCard" alt="image_category">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        {{ post.content | raw}}
+                       
+                    </div>
+                </div>
+        
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Configuration</h5>
+                        <p>Créé le {{ post.createdAt | date('d-M-Y') }}</p>
+                        <p>Statut : {{ post.status }}</p>
+                    </div>
+                    <div class="card-footer">
+                        {% if post.status is same as 'Brouillon' %}
+                            <a href="{{ path('admin_post_toggle_status',{'id': post.id}) }}" class="btn btn-info w-100">Publié le post</a>
+                        {% else %}
+                            <a href="{{ path('admin_post_toggle_status',{'id': post.id}) }}" class="btn btn-info w-100">Passer en brouillon</a>
+                        {% endif %}                        
+                    </div>
+                </div>
+        
+            </div>
+
+            
+
+
+       
+
+    </div>
+
+  </div>
+{% endblock %}

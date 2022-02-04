@@ -1,0 +1,57 @@
+{% extends "admin/base.html.twig" %}
+
+{% block body %}
+
+<div class="container py-5">
+    <div class="row">
+     {% include "_messages_flash.html.twig" %}
+        <div class="col-12">
+            <h1>Liste des utilisateurs</h1>
+        </div>
+        <div class="col-12 mt-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">email</th>
+                        <th scope="col">role</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for user in users %}
+                    {% if user.id is not same as app.user.id %}
+                        <tr>
+                            <th scope="row">{{ user.id }}</th>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if  user.roles[0] is same as "ROLE_ADMIN" %}
+                                    <span class="text-primary">Administrateur</span>
+                                {% else %}
+                                    <span class="text-danger">Utilisateur</span> 
+                                {% endif %}
+                            </td>
+                            <td>
+
+                                {% if  user.roles[0] is same as "ROLE_ADMIN" %}
+                                    <a href="{{ path('admin_user_toggle_role',{'id': user.id}) }}" class="btn btn-secondary">Enlever rôle admin</a>
+                                {% else %}
+                                    <a href="{{ path('admin_user_toggle_role',{'id': user.id}) }}" class="btn btn-info">Attribuer rôle admin</a>
+                                {% endif %}
+                               
+
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                {% endfor %}
+                   
+                </tbody>
+                </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
