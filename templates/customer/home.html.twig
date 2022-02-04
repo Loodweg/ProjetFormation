@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+        <img src="https://www.mamytwink.com/upload/news/2018/aout/28/hotel-des-ventes-wow-bfa.jpg" class="d-block w-100 imageCarousel" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="https://static1.millenium.org/articles/0/34/74/90/@/1170897-ah-article_m-1.jpg" class="d-block w-100 imageCarousel" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="https://taspas1po.fr/wp-content/uploads/2019/10/hv-refonte-1.jpg" class="d-block w-100 imageCarousel" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    </div>
+
+
+   <section class="bg-secondary">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center text-white">Les catégories</h3>
+            </div>  
+            {% for category in categories %}
+                <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
+                    <div class="card">
+                        <img src="{{ category.imagePath }}" class="card-img-top imageCard" alt="image_category">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ category.name }}</h5>
+                            <a href="{{ path('boutique_product_show_by_category',{'id': category.id} ) }}" class="btn btn-primary w-100">Consulter</a>
+                            
+                        </div>
+                    </div>        
+                </div>           
+            {% endfor %}
+        </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center">Les nouveautés</h3>
+            </div>  
+            {% for product in products %}
+                <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
+                    <div class="card">
+                        <img src="{{ product.imagePath }}" class="card-img-top imageCard" alt="image_category">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p>{{ product.price | priceEuro }}</p>
+                            <a href="{{ path('boutique_product_detail',{'id': product.id} ) }}" class="btn btn-primary w-100">Consulter</a>
+                        </div>
+                    </div>
+                </div>    
+            {% endfor %}
+        </div>
+    </div>
+  </section>
+
+{% endblock %}
